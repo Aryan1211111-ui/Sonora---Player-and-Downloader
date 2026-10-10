@@ -1,0 +1,69 @@
+SONORA PLAYER - FEDORA INSTALLATION
+====================================
+
+You need an internet connection to build the app and search/download YouTube
+content. Download only content you own or are authorized to save. Respect
+YouTube's terms and creators' rights.
+
+1. Install system prerequisites
+
+Open a terminal and run:
+
+    sudo dnf install -y python3 python3-pip python3-tkinter
+
+FFmpeg, ffplay, and ffprobe are also required. If your Fedora repositories do
+not provide them, enable RPM Fusion Free and install FFmpeg:
+
+    sudo dnf install -y https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+    sudo dnf install -y ffmpeg
+
+Check that the tools are available:
+
+    ffmpeg -version
+    ffplay -version
+    ffprobe -version
+
+2. Build Sonora
+
+Extract the SonoraPlayer_Fedora source folder, then open a terminal in that
+folder (the folder containing app.py and build_fedora.sh). Run:
+
+    chmod +x build_fedora.sh build_linux.sh
+    ./build_fedora.sh
+
+The build script creates .venv-build, installs PyInstaller and yt-dlp from
+requirements-build.txt, bundles yt-dlp and FFmpeg, and creates the application.
+You do not need to install yt-dlp system-wide.
+
+3. Launch Sonora
+
+    ./dist/SonoraPlayer/run-sonora.sh
+
+The standalone application is in dist/SonoraPlayer/. The portable archive is
+created at dist/SonoraPlayer-linux-x86_64.tar.gz.
+
+4. Run from source instead of building
+
+From this folder, run:
+
+    python3 -m venv .venv-source
+    source .venv-source/bin/activate
+    python -m pip install --upgrade pip
+    python -m pip install -r requirements-build.txt
+    python -m pip install --upgrade yt-dlp
+    python app.py
+
+To leave the virtual environment, press Ctrl+C to stop the app and run:
+
+    deactivate
+
+5. Update yt-dlp in an existing build environment
+
+After building once, update yt-dlp and rebuild with:
+
+    source .venv-build/bin/activate
+    python -m pip install --upgrade yt-dlp
+    deactivate
+    ./build_fedora.sh
+
+Music search and downloads require internet. Local music playback works offline.

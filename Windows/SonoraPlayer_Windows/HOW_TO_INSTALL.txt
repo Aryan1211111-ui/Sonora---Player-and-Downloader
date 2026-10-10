@@ -1,0 +1,54 @@
+SONORA PLAYER - WINDOWS INSTALLATION
+====================================
+
+You need an internet connection to build the app and search/download YouTube
+content. Download only content you own or are authorized to save. Respect
+YouTube's terms and creators' rights.
+
+1. Install prerequisites
+
+- Install Python 3.11 or newer from https://www.python.org/downloads/windows/.
+  Enable the option to add Python to PATH during installation.
+- Install FFmpeg and add its bin folder to PATH. That folder must contain
+  ffmpeg.exe, ffplay.exe, and ffprobe.exe. Open a new Command Prompt and check:
+
+    where ffmpeg
+    where ffplay
+    where ffprobe
+
+2. Build Sonora
+
+Extract the SonoraPlayer_Windows source folder. Open it in File Explorer and
+double-click build_windows.bat, or open Command Prompt in that folder and run:
+
+    build_windows.bat
+
+The script creates .venv-build-windows, installs the build requirements,
+bundles yt-dlp and FFmpeg, and builds the application. The build can take a few
+minutes and requires an internet connection.
+
+3. Launch Sonora
+
+Run dist\SonoraPlayer\run_windows.bat, or open:
+
+    dist\SonoraPlayer\SonoraPlayer.exe
+
+Keep the entire dist\SonoraPlayer folder together; the executable uses files
+bundled beside it.
+
+4. Run from source instead of building
+
+Open Command Prompt in the source folder and run:
+
+    py -3 -m venv .venv-source
+    .venv-source\Scripts\activate
+    python -m pip install --upgrade pip
+    python -m pip install -r requirements-build.txt
+    python app.py
+
+To leave the virtual environment, close the app and run:
+
+    deactivate
+
+YouTube search and downloads require internet. Local music playback works
+offline.

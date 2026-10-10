@@ -1,0 +1,4 @@
+Sonora Player — Python + Tkinter + PyInstaller
+No Electron, no Node/npm, no .deb.
+Build: ./build_pyinstaller.sh
+Run source: ./run_from_source.sh
