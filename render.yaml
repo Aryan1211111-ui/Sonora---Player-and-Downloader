@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: sonora-player
+    env: python
+    buildCommand: poetry install --no-root
+    startCommand: poetry run python main.py
